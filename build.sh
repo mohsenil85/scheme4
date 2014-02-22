@@ -1,3 +1,8 @@
 #!/bin/bash
-rm *.{c,h}; rm a.out;
-yacc -d scheme.y; lex scheme.l; gcc lex.yy.c y.tab.c; ./a.out
+rm src/y.tab.*;
+rm src/lex.yy.c;
+cd src;
+yacc -d parser.y ;
+lex tokens.l;
+cd .. ;
+make clean; make; ./bin/main
