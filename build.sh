@@ -5,4 +5,4 @@ cd src;
 yacc -d parser.y ;
 lex tokens.l;
 cd .. ;
-make clean; make; ./bin/main
+make clean; make remove;  make; ./bin/main

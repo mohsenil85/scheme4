@@ -371,16 +371,16 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[13] =
     {   0,
-        0,    0,    8,    7,    6,    2,    3,    5,    4,    1,
+        0,    0,    8,    6,    7,    2,    3,    5,    4,    1,
         1,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    2,    2,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    1,    1,    1,    1,    1,    1,    1,    3,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    3,
         4,    5,    6,    1,    1,    1,    1,    7,    7,    7,
         7,    7,    7,    7,    7,    7,    7,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -454,7 +454,8 @@ char *yytext;
 #line 2 "tokens.l"
 #include <stdio.h>
 #include "y.tab.h"
-#line 458 "lex.yy.c"
+extern YYSTYPE yylval;
+#line 459 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -636,9 +637,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 6 "tokens.l"
+#line 7 "tokens.l"
 
-#line 642 "lex.yy.c"
+#line 643 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -723,38 +724,37 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 7 "tokens.l"
-return NUMBER;
+#line 8 "tokens.l"
+{ yylval=atoi(yytext); return NUMBER; };
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 8 "tokens.l"
+#line 9 "tokens.l"
 return OPAREN;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 9 "tokens.l"
+#line 10 "tokens.l"
 return CPAREN;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 10 "tokens.l"
+#line 11 "tokens.l"
 return PLUS;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 11 "tokens.l"
+#line 12 "tokens.l"
 return MULT;
 	YY_BREAK
 case 6:
-/* rule 6 can match eol */
 YY_RULE_SETUP
-#line 12 "tokens.l"
-/*ignore whitespace*/;
+#line 13 "tokens.l"
+;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 13 "tokens.l"
+#line 14 "tokens.l"
 ECHO;
 	YY_BREAK
 #line 761 "lex.yy.c"
@@ -1754,7 +1754,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 13 "tokens.l"
+#line 14 "tokens.l"
 
 
 

@@ -3,5 +3,6 @@
 extern int yyparse(void);
 int main(){
   printf("starting...\n");
+  printf("\n");
   yyparse();
 }

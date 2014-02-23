@@ -1,20 +1,31 @@
 %{
 #include <stdio.h>
 #include <string.h>
+#define YYSTYPE int;
 extern int yylex(void);
 void yyerror(const char *str){
-  fprintf(stderr, "error:%s\n", str);
+  fprirtf(stderr, "error: %s\n", str);
 }
 int yywrap(){ return 1; }
 %}
 
-%token OPAREN CPAREN PLUS MULT NUMBER
+%union{
+int num;
+char *id;
+}
+
+%token <num> NUMBER
+%token <id> OPAREN CPAREN PLUS MULT NEWLINE
 
 %%
 
-int: NUMBER{
-   printf("%d\n", $1);
-   }
-   ;
+start : line
+      | start line
+      ;
+
+line: NUMBER { 
+    printf("%d\n", $1);
+    }
+    ;
 
 %%

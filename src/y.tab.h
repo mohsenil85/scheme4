@@ -39,25 +39,35 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     OPAREN = 258,
-     CPAREN = 259,
-     PLUS = 260,
-     MULT = 261,
-     NUMBER = 262
+     NUMBER = 258,
+     OPAREN = 259,
+     CPAREN = 260,
+     PLUS = 261,
+     MULT = 262,
+     NEWLINE = 263
    };
 #endif
 /* Tokens.  */
-#define OPAREN 258
-#define CPAREN 259
-#define PLUS 260
-#define MULT 261
-#define NUMBER 262
+#define NUMBER 258
+#define OPAREN 259
+#define CPAREN 260
+#define PLUS 261
+#define MULT 262
+#define NEWLINE 263
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+#line 12 "parser.y"
+{
+int num;
+char *id;
+}
+/* Line 1529 of yacc.c.  */
+#line 70 "y.tab.h"
+	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1

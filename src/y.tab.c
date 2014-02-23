@@ -66,19 +66,21 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     OPAREN = 258,
-     CPAREN = 259,
-     PLUS = 260,
-     MULT = 261,
-     NUMBER = 262
+     NUMBER = 258,
+     OPAREN = 259,
+     CPAREN = 260,
+     PLUS = 261,
+     MULT = 262,
+     NEWLINE = 263
    };
 #endif
 /* Tokens.  */
-#define OPAREN 258
-#define CPAREN 259
-#define PLUS 260
-#define MULT 261
-#define NUMBER 262
+#define NUMBER 258
+#define OPAREN 259
+#define CPAREN 260
+#define PLUS 261
+#define MULT 262
+#define NEWLINE 263
 
 
 
@@ -88,9 +90,10 @@
 
 #include <stdio.h>
 #include <string.h>
+#define YYSTYPE int;
 extern int yylex(void);
 void yyerror(const char *str){
-  fprintf(stderr, "error:%s\n", str);
+  fprirtf(stderr, "error: %s\n", str);
 }
 int yywrap(){ return 1; }
 
@@ -114,7 +117,15 @@ int yywrap(){ return 1; }
 #endif
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+#line 12 "parser.y"
+{
+int num;
+char *id;
+}
+/* Line 193 of yacc.c.  */
+#line 128 "y.tab.c"
+	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
@@ -126,7 +137,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 130 "y.tab.c"
+#line 141 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -339,22 +350,22 @@ union yyalloc
 #endif
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  3
+#define YYFINAL  4
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   1
+#define YYLAST   4
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  8
+#define YYNTOKENS  9
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  2
+#define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  2
+#define YYNRULES  4
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  4
+#define YYNSTATES  6
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   262
+#define YYMAXUTOK   263
 
 #define YYTRANSLATE(YYX)						\
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -388,7 +399,7 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7
+       5,     6,     7,     8
 };
 
 #if YYDEBUG
@@ -396,19 +407,19 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3
+       0,     0,     3,     5,     8
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-       9,     0,    -1,     7,    -1
+      10,     0,    -1,    11,    -1,    10,    11,    -1,     3,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    15,    15
+       0,    22,    22,    23,    26
 };
 #endif
 
@@ -417,8 +428,8 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "OPAREN", "CPAREN", "PLUS", "MULT",
-  "NUMBER", "$accept", "int", 0
+  "$end", "error", "$undefined", "NUMBER", "OPAREN", "CPAREN", "PLUS",
+  "MULT", "NEWLINE", "$accept", "start", "line", 0
 };
 #endif
 
@@ -427,20 +438,20 @@ static const char *const yytname[] =
    token YYLEX-NUM.  */
 static const yytype_uint16 yytoknum[] =
 {
-       0,   256,   257,   258,   259,   260,   261,   262
+       0,   256,   257,   258,   259,   260,   261,   262,   263
 };
 # endif
 
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,     8,     9
+       0,     9,    10,    10,    11
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1
+       0,     2,     1,     2,     1
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -448,27 +459,27 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     2,     0,     1
+       0,     4,     0,     2,     1,     3
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2
+      -1,     2,     3
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -8
+#define YYPACT_NINF -3
 static const yytype_int8 yypact[] =
 {
-      -7,    -8,     1,    -8
+      -2,    -3,     0,    -3,    -3,    -3
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -8,    -8
+      -3,    -3,     2
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -478,19 +489,19 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-       1,     3
+       4,     1,     0,     1,     5
 };
 
-static const yytype_uint8 yycheck[] =
+static const yytype_int8 yycheck[] =
 {
-       7,     0
+       0,     3,    -1,     3,     2
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     7,     9,     0
+       0,     3,    10,    11,     0,    11
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1304,16 +1315,16 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 2:
-#line 15 "parser.y"
-    {
-   printf("%d\n", (yyvsp[(1) - (1)]));
-   }
+        case 4:
+#line 26 "parser.y"
+    { 
+    printf("%d\n", (yyvsp[(1) - (1)].num));
+    }
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1317 "y.tab.c"
+#line 1328 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1527,6 +1538,6 @@ yyreturn:
 }
 
 
-#line 20 "parser.y"
+#line 31 "parser.y"
 
 
