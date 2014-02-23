@@ -4,10 +4,10 @@
 %}
 
 %%
-[0-9]+                return NUMBER;
-\(                    return OPAREN;
-\)                    return CPAREN;
-\+                    return PLUS;
-\*                    return MULT;
+[0-9]+                yylval.num = atoi(yytext); return NUMBER;
+\(                    yylval.id = yytext; return OPAREN;
+\)                    yylval.id = yytext; return CPAREN;
+\+                    yylval.id = yytext; return PLUS;
+\*                    yylval.id = yytext; return MULT;
 .                     ;
 %%

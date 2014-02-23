@@ -14,18 +14,22 @@ int num;
 char *id;
 }
 
-%token <num> NUMBER
-%token <id> OPAREN CPAREN PLUS MULT NEWLINE
+%token <num> NUMBER 
+%token <id> OPAREN CPAREN PLUS MULT NEWLINE 
+%type <num> exp
+%start exp
 
 %%
 
-start : line
-      | start line
-      ;
-
-line: NUMBER { 
-    printf("%d\n", $1);
-    }
-    ;
+exp: NUMBER { /*printf("%d\n", $1); */}
+   | PLUS exp exp {
+   $$ = $2 + $3;
+   printf("plus: %d\n", $$);
+   }
+   |MULT exp exp{
+   $$ = $2 * $3;
+   printf("mult: %d\n", $$);
+   }
+   ;
 
 %%
