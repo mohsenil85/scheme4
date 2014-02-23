@@ -13,9 +13,9 @@
 # project name (generate executable with this name)
 TARGET   = main
 
-CC       = gcc
+CC       = clang
 # compiling flags here
-CFLAGS   = -std=c99 -Wall -I.
+CFLAGS   = -std=c99 -Wall -I -Weverything.
 
 
 LINKER   = gcc -o

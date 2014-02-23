@@ -1,10 +1,10 @@
 %{
 #include <stdio.h>
 #include <string.h>
-#define YYSTYPE int;
+#include <stdlib.h>
 extern int yylex(void);
 void yyerror(const char *str){
-  fprirtf(stderr, "error: %s\n", str);
+  fprintf(stderr, "error: %s\n", str);
 }
 int yywrap(){ return 1; }
 %}

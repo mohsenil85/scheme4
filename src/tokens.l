@@ -1,11 +1,10 @@
 %{
 #include <stdio.h>
 #include "y.tab.h"
-extern YYSTYPE yylval;
 %}
 
 %%
-[0-9]+                { yylval=atoi(yytext); return NUMBER; };
+[0-9]+                return NUMBER;
 \(                    return OPAREN;
 \)                    return CPAREN;
 \+                    return PLUS;
