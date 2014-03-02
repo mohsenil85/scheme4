@@ -3,21 +3,28 @@
 #include "../lib/minunit.h"
 
 //file to test: stack.c
-#include "../src/stack.c"
-
-#define STACK_MAX 256
+#include "../src/stack.h"
+#include "../src/list.h"
+//#include "../src/stack.c"
+//#include "../src/list.c"
 
 int tests_run = 0;
 
-Stack s;
 
-char a = 'a';
-char b = 'b';
+static char * test_stack_initialize() {
+  Stack s;
+  stack_new(&s, sizeof(int), NULL);
+  mu_assert("error, stack should not be null after init", NULL != &s);
+  stack_destroy(&s);
+  mu_assert("error, stack should  be null after destruction", NULL == &s);
+}
 
+/*
 static char * test_stack_peek() {
-  stack_init(&s);
-  stack_push(&s, a);
-  mu_assert("error, stack peek failed", a == stack_peek(&s));
+  Stack s;
+  stack_new(&s, sizeof(int), NULL);
+  int val = 10;
+  stack_push(&s, &val);
   mu_assert("error, stack peek failed", b != stack_peek(&s));
   mu_assert("error, stack should not be empty after peek", false == stack_is_empty(&s));
 
@@ -54,7 +61,7 @@ static char * fill_stack() {
   return 0;
 }
 
-/*
+
 static char * var_args_push() {
   Stack s;
   stack_init(&s);
@@ -70,11 +77,13 @@ static char * var_args_push() {
 */
 
 static char * all_tests() {
-  mu_run_test(test_stack_peek);
+  mu_run_test(test_stack_initialize);
+  /*
   mu_run_test(test_stack_pop);
   mu_run_test(test_stack_is_empty);
   mu_run_test(negate_test_stack_is_empty);
   mu_run_test(fill_stack);
+  */
   return 0;
 }
 

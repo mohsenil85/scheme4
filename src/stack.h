@@ -1,8 +1,6 @@
-#ifndef __STACK_H
-#define __STACK_H
+#ifndef STACK_H
+#define STACK_H
 
-// from previous post on linked-list implementation
-// in C
 #include "list.h"
 typedef struct {
   List* list;
@@ -13,5 +11,5 @@ void stack_push(Stack* s, void* element);
 void stack_pop(Stack* s, void* element);
 void stack_peek(Stack* s, void* element);
 int stack_size(Stack* s);
-
-#endif
+bool stack_is_empty(Stack *s);
+#endif /* STACK_H */

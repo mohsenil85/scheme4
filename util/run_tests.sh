@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 echo "start tests..."
+cd ..;
 for i in `ls test`; do
   echo "testing $i..."
   echo
@@ -10,4 +11,5 @@ for i in `ls test`; do
 done
 echo
 echo
+cd util;
 echo "end tests..."

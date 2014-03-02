@@ -28,4 +28,5 @@ int list_size(List* list);
 void list_for_each(List* list, listIterator iter);
 void list_head(List* list, void* element, bool removeFromList);
 void list_tail(List* list, void* element);
+
 #endif /* LIST_H */

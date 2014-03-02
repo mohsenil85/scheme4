@@ -24,3 +24,8 @@ void stack_peek(Stack* s, void* element) {
   list_head(s->list, element, false);
 }
 int stack_size(Stack* s) { return list_size(s->list); }
+
+bool stack_is_empty(Stack *s){
+  return list_size(s->list) == 0;
+}
+
