@@ -2,7 +2,7 @@
 #include "../lib/minunit.h"
 
 #include "../src/list.h"
-//#include "../src/list.c"
+#include "../src/list.c"
 
 int tests_run = 0;
 
@@ -23,14 +23,10 @@ static char * test_list_insert() {
   list_head(&list, &head, true);
   mu_assert("error, head != 1", head == 1);
 
+  list_destroy(&list);
   return 0;
 }
-/*
-   static char * test_bar() {
-   mu_assert("error, bar != 5", bar == 5);
-   return 0;
-   }
-   */
+
 static char * all_tests() {
   mu_run_test(test_list_insert);
   return 0;
