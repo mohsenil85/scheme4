@@ -10,6 +10,6 @@ typedef union {
 } ParseValue;
 
 void setup();
-
+void teardown();
 
 #endif /* COMMON_H */

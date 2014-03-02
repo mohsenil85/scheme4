@@ -22,7 +22,7 @@ int yywrap() { return 1; }
 %start exp 
 %%
 
-exp : NUMBER{ /*printf("%d\n", $1); */ } 
+exp : NUMBER { /*printf("%d\n", $1); */ } 
     | PLUS exp exp 
     {
       $$ = $2 + $3;

@@ -12,4 +12,5 @@ int main() {
   printf("\n");
   setup();
   yyparse();
+  teardown();
 }

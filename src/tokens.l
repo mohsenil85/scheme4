@@ -10,5 +10,5 @@
 \)              yylval.id = yytext; return CPAREN;
 \+              yylval.id = yytext; return PLUS;
 \*              yylval.id = yytext; return MULT;
-.               yytext;
+.               ;
 %%
