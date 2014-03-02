@@ -3,9 +3,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include "stack.h"
+#include "common.h"
 
 extern Stack parse_stack;
-stack_new(&parse_stack, sizeof(ParseValue), NULL);
 extern int yylex(void);
 void yyerror(const char * str) { fprintf(stderr, "error: %s\n", str); }
 int yywrap() { return 1; }

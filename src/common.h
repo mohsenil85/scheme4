@@ -1,12 +1,15 @@
 #ifndef COMMON_H
 #define COMMON_H
-#include "stack.h"
 
-typedef union ParseValue{
-int idata;
-char* sdata;
+#include "stack.h"
+//extern  Stack parse_stack;
+
+typedef union {
+  int idata;
+  char * cdata;
 } ParseValue;
 
-//extern Stack parse_stack;
+void setup();
+
 
 #endif /* COMMON_H */
