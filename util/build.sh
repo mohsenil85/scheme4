@@ -9,5 +9,6 @@ yacc -d parser.y ;
 lex tokens.l;
 cd ..;
 make clean; make remove;  make;
+./util/run_tests.sh;
 cd util;
 ../bin/main
