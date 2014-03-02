@@ -4,7 +4,7 @@ echo "start tests..."
 for i in `ls test`; do
   echo "testing $i..."
   echo
-  gcc test/$i; 
+  clang --std=c99  test/$i; 
   ./a.out; 
   rm a.out;
 done

@@ -2,7 +2,7 @@
 #include "../lib/minunit.h"
 
 #include "../src/list.h"
-#include "../src/list.c"
+//#include "../src/list.c"
 
 int tests_run = 0;
 
@@ -10,17 +10,19 @@ static char * test_list_insert() {
   int max = 10;
   List list;
 
+  list_new(&list, sizeof(int), NULL);
   for(int i = 0; i < max; i++){
     list_append(&list, &i);
   }
 
 
-  void* head;
+  int head;
   list_head(&list, &head, true);
-  //int j = 1;
-  //head = &j;
+  mu_assert("error, head != 0", head == 0);
 
-  mu_assert("error, head != 1", *(int *)head == 1);
+  list_head(&list, &head, true);
+  mu_assert("error, head != 1", head == 1);
+
   return 0;
 }
 /*
