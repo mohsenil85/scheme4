@@ -17,5 +17,7 @@
 \)              yylval.id = yytext; return CPAREN;
 \+              yylval.id = yytext; return PLUS;
 \*              yylval.id = yytext; return MULT;
+\"[^\"\n]*\"                        return STR; 
+[a-zA-Z][a-zA-Z0-9]*                return ID; 
 .               ;
 %%

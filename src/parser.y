@@ -10,6 +10,8 @@ extern Stack parse_stack;
 extern int yylex(void);
 void yyerror(const char * str) { fprintf(stderr, "error: %s\n", str); }
 int yywrap() { return 1; }
+
+//%type<num> exp 
 %}
 
 
@@ -18,31 +20,31 @@ int yywrap() { return 1; }
   char* id;
 }
 %token<num> NUMBER 
-%token<id> OPAREN CPAREN PLUS MULT NEWLINE 
-%type<num> exp 
-%start exp 
+%token<id> OPAREN CPAREN PLUS MULT NEWLINE ID STR
+%start program
 %%
 
+program: slist
+       ;
 
-exp : NUMBER { /*printf("%d\n", $1); */ } 
-    | PLUS exp exp 
-    {
-      $$ = $2 + $3;
-      printf("plus: %d\n", $$);
-    }
-    | MULT exp exp
-    {
-        $$ = $2 * $3;
-        stack_push(&parse_stack, &$$);
-        printf("mult: %d\n", $$);
-    }
-    | open
+slist: slist sexpr 
+     | sexpr
+     ;
+
+sexpr: atom                 {printf("matched sexpr\n");}
+     | list
+     ;
+
+list: OPAREN members CPAREN       {printf("matched list\n");}
+    | OPAREN CPAREN                {printf("matched empty list\n");}
     ;
 
-open : /*empty */
-     | OPAREN  {
-       printf("oparen detected\n");
-       BEGIN (0);
-       };
+members: sexpr              {printf("members 1\n");}
+       | sexpr members         {printf("members 2\n");}
+       ;
 
+atom: ID                    {printf("ID\n");}
+    | NUMBER                   {printf("NUM\n");}
+    | STR                   {printf("STR\n");}
+    ;
 %%
