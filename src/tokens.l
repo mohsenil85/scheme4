@@ -1,7 +1,14 @@
 %{
 #include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 #include "y.tab.h"
+#define _POSIX_C_SOURCE 1
 %} 
+
+%option noinput
+%option nounput
 
 %%
 

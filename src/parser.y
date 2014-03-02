@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "stack.h"
 #include "common.h"
+#define _POSIX_C_SOURCE 1
 
 extern Stack parse_stack;
 extern int yylex(void);
@@ -22,6 +23,7 @@ int yywrap() { return 1; }
 %start exp 
 %%
 
+
 exp : NUMBER { /*printf("%d\n", $1); */ } 
     | PLUS exp exp 
     {
@@ -34,6 +36,13 @@ exp : NUMBER { /*printf("%d\n", $1); */ }
         stack_push(&parse_stack, &$$);
         printf("mult: %d\n", $$);
     }
+    | open
     ;
+
+open : /*empty */
+     | OPAREN  {
+       printf("oparen detected\n");
+       BEGIN (0);
+       };
 
 %%
