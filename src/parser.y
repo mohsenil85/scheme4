@@ -20,7 +20,7 @@ int yywrap() { return 1; }
   char* id;
 }
 %token<num> NUMBER 
-%token<id> OPAREN CPAREN PLUS MULT NEWLINE ID STR
+%token<id> OPAREN CPAREN PLUS MULT NEWLINE ID STR EXIT
 %start program
 %%
 
@@ -33,18 +33,33 @@ slist: slist sexpr
 
 sexpr: atom                 {printf("matched sexpr\n");}
      | list
+     | exit
      ;
 
-list: OPAREN members CPAREN       {printf("matched list\n");}
-    | OPAREN CPAREN                {printf("matched empty list\n");}
+list: open members close       {printf("matched list\n");}
+    | open close                {printf("matched empty list\n");}
     ;
 
 members: sexpr              {printf("members 1\n");}
        | sexpr members         {printf("members 2\n");}
+       | function members     {printf("function, members \n");}
        ;
 
 atom: ID                    {printf("ID\n");}
     | NUMBER                   {printf("NUM\n");}
     | STR                   {printf("STR\n");}
+    ;
+
+function: MULT              {printf("mult\n");}
+        | PLUS              {printf("plus\n");}
+        ;
+
+open: OPAREN {printf("open paren\n");}
+    ;
+
+close: CPAREN {printf("close paren\n");}
+     ;
+
+exit: EXIT {YYACCEPT;}
     ;
 %%

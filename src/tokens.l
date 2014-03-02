@@ -12,6 +12,7 @@
 
 %%
 
+exit            return EXIT;
 [0-9]+          yylval.num = atoi(yytext); return NUMBER;
 \(              yylval.id = yytext; return OPAREN;
 \)              yylval.id = yytext; return CPAREN;
