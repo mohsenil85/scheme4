@@ -2,10 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <limits.h>
-  extern int yylex(void);
-  void yyerror(const char * str) { fprintf(stderr, "error: %s\n", str); }
-  int yywrap() { return 1; }
+#include "stack.h"
+
+extern Stack parse_stack;
+stack_new(&parse_stack, sizeof(ParseValue), NULL);
+extern int yylex(void);
+void yyerror(const char * str) { fprintf(stderr, "error: %s\n", str); }
+int yywrap() { return 1; }
 %}
 
 
@@ -27,12 +30,9 @@ exp : NUMBER{ /*printf("%d\n", $1); */ }
     }
     | MULT exp exp
     {
-      $$ = $2 * $3;
-      if ($$ >= INT_MAX) {
-        printf("error, int max exceeded\n");
-      } else {
+        $$ = $2 * $3;
+        stack_push(&parse_stack, &$$);
         printf("mult: %d\n", $$);
-      }
     }
     ;
 
