@@ -11,6 +11,9 @@ int main() {
   printf("starting...\n");
   printf("\n");
   setup();
+  printf("about to parse...\n");
   yyparse();
+  printf("about to teardown...\n");
   teardown();
+  printf("ending...\n");
 }
