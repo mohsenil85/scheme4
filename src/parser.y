@@ -20,7 +20,8 @@ int yywrap() { return 1; }
   char* id;
 }
 %token<num> NUMBER 
-%token<id> OPAREN CPAREN PLUS MULT NEWLINE ID STR EXIT
+%token OPAREN CPAREN PLUS MULT NEWLINE STR ID EXIT
+%type<id> ID atom
 %start program
 %%
 
@@ -46,7 +47,7 @@ members: sexpr              {printf("members 1\n");}
        ;
 
 atom: ID                    {printf("ID\n");}
-    | NUMBER                   {printf("NUM\n");}
+    | NUMBER                {printf("NUM\n"); stack_push(&parse_stack, &$$);}
     | STR                   {printf("STR\n");}
     ;
 
