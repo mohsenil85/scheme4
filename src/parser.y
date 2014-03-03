@@ -21,7 +21,7 @@ int yywrap() { return 1; }
 }
 %token<num> NUMBER 
 %token OPAREN CPAREN PLUS MULT NEWLINE STR ID EXIT
-%type<id> ID atom
+%type<id> ID atom STR
 %start program
 %%
 
@@ -46,9 +46,9 @@ members: sexpr              {printf("members 1\n");}
        | function members     {printf("function, members \n");}
        ;
 
-atom: ID                    {printf("ID\n");}
+atom: ID                    {printf("ID\n"); stack_push(&parse_stack, &$$);}
     | NUMBER                {printf("NUM\n"); stack_push(&parse_stack, &$$);}
-    | STR                   {printf("STR\n");}
+    | STR                   {printf("STR\n"); stack_push(&parse_stack, &$$);}
     ;
 
 function: MULT              {printf("mult\n");}
