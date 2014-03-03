@@ -47,8 +47,18 @@ members: sexpr              {printf("members 1\n");}
        ;
 
 atom: ID                    {printf("ID\n"); stack_push(&parse_stack, &$$);}
-    | NUMBER                {printf("NUM\n"); stack_push(&parse_stack, &$$);}
-    | STR                   {printf("STR\n"); stack_push(&parse_stack, &$$);}
+    | NUMBER {
+    printf("NUM\n"); 
+    ParseValue pv;
+    memcpy(&pv.idata, &$$, sizeof(int)+1);
+    stack_push(&parse_stack, &pv);
+    }
+    | STR  {
+    printf("STR\n");
+    ParseValue pv;
+    strncpy(pv.cdata, $$, 10);
+    stack_push(&parse_stack, &pv);
+    }
     ;
 
 function: MULT              {printf("mult\n");}

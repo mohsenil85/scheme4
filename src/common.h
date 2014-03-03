@@ -4,7 +4,7 @@
 #include "stack.h"
 //extern  Stack parse_stack;
 
-typedef union {
+typedef struct {
   int idata;
   char * cdata;
 } ParseValue;
