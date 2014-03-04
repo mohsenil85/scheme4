@@ -18,10 +18,12 @@ int yywrap() { return 1; }
 %union {
   int num;
   char* id;
+  char* str;
 }
 %token<num> NUMBER 
-%token OPAREN CPAREN PLUS MULT NEWLINE STR ID EXIT
-%type<id> ID atom STR
+%token<str> STR
+%token OPAREN CPAREN PLUS MULT NEWLINE ID EXIT 
+%type<id> ID atom 
 %start program
 %%
 
@@ -63,10 +65,14 @@ atom: ID {
     }
     | STR  {
     printf("STR\n");
-    ParseValue pv;
-    strncpy(pv.cdata, $$, 10);
+    ParseValue pv = {
+      .idata = 0,
+      .cdata = "\0"
+    };
+    pv.cdata = strdup($1);
     stack_push(&parse_stack, &pv);
     }
+    | members {printf("members sub atom\n");}
     ;
 
 function: MULT              {printf("mult\n");}

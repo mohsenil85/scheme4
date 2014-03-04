@@ -12,13 +12,13 @@
 
 %%
 
-exit            return EXIT;
-[0-9]+          yylval.num = atoi(yytext); return NUMBER;
-\(              yylval.id = yytext; return OPAREN;
-\)              yylval.id = yytext; return CPAREN;
-\+              yylval.id = yytext; return PLUS;
-\*              yylval.id = yytext; return MULT;
-\"[^\"\n]*\"                        return STR; 
-[a-zA-Z][a-zA-Z0-9]*  yylval.id = yytext; return ID; 
+exit                        return EXIT;
+[0-9]+                      yylval.num = atoi(yytext); return NUMBER;
+\(                          yylval.id = yytext;        return OPAREN;
+\)                          yylval.id = yytext;        return CPAREN;
+\+                          yylval.id = yytext;        return PLUS;
+\*                          yylval.id = yytext;        return MULT;
+\"[^\"\n]*\"                yylval.str = yytext;       return STR; 
+[a-zA-Z][a-zA-Z0-9]*        yylval.id = yytext;        return ID; 
 .               ;
 %%
