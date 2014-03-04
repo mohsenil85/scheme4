@@ -52,7 +52,7 @@ atom: ID {
     ParseValue pv = {
       .idata = 0,
       .cdata = "\0",
-      .tdata = 0
+      .tdata = T_ID
     };
     pv.cdata = strdup($1);
     stack_push(&parse_stack, &pv);

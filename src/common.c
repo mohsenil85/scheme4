@@ -18,10 +18,24 @@ void teardown(){
 }
 
 void eval(Stack s){
+  printf("eval was hit\n");
   while (!stack_is_empty(&s)){
+    printf("eval/while was hit\n");
     ParseValue pv;
     stack_pop(&s, &pv);
-    //switch() 
+    switch(pv.tdata){
+      case (T_ID):
+        printf("id was hit\n");
+        break;
+      case (T_NUMBER):
+        printf("number was hit\n");
+        break;
+      case (T_STRING):
+        printf("string was hit\n");
+        break;
+      default:
+        printf("the unthinkable has happened\n");
+    }
   }
   /*
      if (!stack_is_empty(&parse_stack)){
