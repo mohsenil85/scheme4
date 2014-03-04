@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "stack.h"
 #include "common.h"
 
@@ -17,6 +18,27 @@ void teardown(){
   stack_destroy(&eval_stack);
 }
 
+
+void parse_string(char * s){
+    ParseValue pv = {
+      .idata = 0,
+      .cdata = "\0",
+      .tdata = T_STRING
+    };
+    pv.cdata = strdup(s);
+    stack_push(&parse_stack, &pv);
+
+}
+void parse_int(int i){
+    ParseValue pv = {
+      .idata = 0,
+      .cdata = "\0",
+      .tdata = T_NUMBER
+    };
+    memcpy(&pv.idata, &i, sizeof(int)+1);
+    stack_push(&parse_stack, &pv);
+}
+
 void eval(Stack s){
   printf("eval was hit\n");
   while (!stack_is_empty(&s)){
@@ -25,9 +47,11 @@ void eval(Stack s){
     stack_pop(&s, &pv);
     switch(pv.tdata){
       case (T_ID):
+        printf("got %s\n", pv.cdata);
         printf("id was hit\n");
         break;
       case (T_NUMBER):
+        printf("got %d\n", pv.idata);
         printf("number was hit\n");
         break;
       case (T_STRING):
@@ -37,17 +61,4 @@ void eval(Stack s){
         printf("the unthinkable has happened\n");
     }
   }
-  /*
-     if (!stack_is_empty(&parse_stack)){
-     ParseValue i;
-     stack_pop(&parse_stack, &i);
-     if (i.idata){
-     printf("int:  stack had this on it: %d\n", i.idata);
-     } else if (i.cdata) {
-     printf("string :stack had this on it: %s\n", i.cdata);
-     } else {
-     printf("unknown data type...\n");
-     }
-     }
-     */
 }

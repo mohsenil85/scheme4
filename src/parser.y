@@ -49,33 +49,15 @@ members: sexpr              {printf("members 1\n");}
 
 atom: ID {
     printf("ID\n"); 
-    ParseValue pv = {
-      .idata = 0,
-      .cdata = "\0",
-      .tdata = T_ID
-    };
-    pv.cdata = strdup($1);
-    stack_push(&parse_stack, &pv);
+    parse_string($1);
     }
     | NUMBER {
     printf("NUM\n"); 
-    ParseValue pv = {
-      .idata = 0,
-      .cdata = "\0",
-      .tdata = T_NUMBER
-    };
-    memcpy(&pv.idata, &$$, sizeof(int)+1);
-    stack_push(&parse_stack, &pv);
+    parse_int($1);
     }
     | STR  {
     printf("STR\n");
-    ParseValue pv = {
-      .idata = 0,
-      .cdata = "\0",
-      .tdata = T_STRING
-    };
-    pv.cdata = strdup($1);
-    stack_push(&parse_stack, &pv);
+    parse_string($1);
     }
     | members {printf("members sub atom\n");}
     ;
