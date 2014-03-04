@@ -11,7 +11,6 @@ extern int yylex(void);
 void yyerror(const char * str) { fprintf(stderr, "error: %s\n", str); }
 int yywrap() { return 1; }
 
-//%type<num> exp 
 %}
 
 
@@ -52,14 +51,19 @@ atom: ID {
     printf("ID\n"); 
     ParseValue pv = {
       .idata = 0,
-      .cdata = "\0"
+      .cdata = "\0",
+      .tdata = 0
     };
     pv.cdata = strdup($1);
     stack_push(&parse_stack, &pv);
     }
     | NUMBER {
     printf("NUM\n"); 
-    ParseValue pv;
+    ParseValue pv = {
+      .idata = 0,
+      .cdata = "\0",
+      .tdata = T_NUMBER
+    };
     memcpy(&pv.idata, &$$, sizeof(int)+1);
     stack_push(&parse_stack, &pv);
     }
@@ -67,7 +71,8 @@ atom: ID {
     printf("STR\n");
     ParseValue pv = {
       .idata = 0,
-      .cdata = "\0"
+      .cdata = "\0",
+      .tdata = T_STRING
     };
     pv.cdata = strdup($1);
     stack_push(&parse_stack, &pv);
