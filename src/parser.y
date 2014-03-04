@@ -46,7 +46,15 @@ members: sexpr              {printf("members 1\n");}
        | function members     {printf("function, members \n");}
        ;
 
-atom: ID                    {printf("ID\n"); stack_push(&parse_stack, &$$);}
+atom: ID {
+    printf("ID\n"); 
+    ParseValue pv = {
+      .idata = 0,
+      .cdata = "\0",
+    };
+    pv.cdata = strdup($1);
+    stack_push(&parse_stack, &pv);
+    }
     | NUMBER {
     printf("NUM\n"); 
     ParseValue pv;

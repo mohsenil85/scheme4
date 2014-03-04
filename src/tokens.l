@@ -19,6 +19,6 @@ exit            return EXIT;
 \+              yylval.id = yytext; return PLUS;
 \*              yylval.id = yytext; return MULT;
 \"[^\"\n]*\"                        return STR; 
-[a-zA-Z][a-zA-Z0-9]*                return ID; 
+[a-zA-Z][a-zA-Z0-9]*  yylval.id = yytext; return ID; 
 .               ;
 %%
