@@ -18,11 +18,14 @@ int yywrap() { return 1; }
   int num;
   char* id;
   char* str;
+  char* syn;
 }
 %token<num> NUMBER 
 %token<str> STR
 %token OPAREN CPAREN PLUS MULT NEWLINE ID EXIT 
 %type<id> ID atom 
+%type<syn> OPAREN CPAREN MULT PLUS
+
 %start program
 %%
 
@@ -62,14 +65,25 @@ atom: ID {
     | members {printf("members sub atom\n");}
     ;
 
-function: MULT              {printf("mult\n");}
-        | PLUS              {printf("plus\n");}
+function: MULT  {
+        parse_string($1);
+        printf("mult\n");
+        }
+        | PLUS {
+        parse_string($1);
+        printf("plus\n");
+        }
         ;
 
-open: OPAREN {printf("open paren\n");}
+open: OPAREN {
+    printf("open paren\n");
+    parse_string($1);
+    }
     ;
 
-close: CPAREN {printf("close paren\n");}
+close: CPAREN {
+     printf("close paren\n");
+     }
      ;
 
 exit: EXIT {YYACCEPT;}

@@ -55,6 +55,7 @@ void eval(Stack s){
         printf("number was hit\n");
         break;
       case (T_STRING):
+        printf("got %s\n", pv.cdata);
         printf("string was hit\n");
         break;
       default:
