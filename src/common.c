@@ -39,10 +39,18 @@ void parse_int(int i){
     stack_push(&parse_stack, &pv);
 }
 
-void eval(Stack s){
+void push_on_eval(Stack s){
   printf("eval was hit\n");
   while (!stack_is_empty(&s)){
-    printf("eval/while was hit\n");
+    ParseValue pv;
+    stack_pop(&s, &pv);
+    if (strcmp(pv.cdata, "(") != 0 ){
+printf("this *************** was hit\n");
+    } else {
+
+printf("other *************** was hit\n");
+    }
+  /*  printf("eval/while was hit\n");
     ParseValue pv;
     stack_pop(&s, &pv);
     switch(pv.tdata){
@@ -61,5 +69,6 @@ void eval(Stack s){
       default:
         printf("the unthinkable has happened\n");
     }
+*/
   }
 }

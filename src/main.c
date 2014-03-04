@@ -15,7 +15,6 @@ int main() {
   printf("about to parse...\n");
   yyparse();
   printf("about to eval...\n");
-  eval(parse_stack);
   printf("about to teardown...\n");
   teardown();
   printf("ending...\n");
