@@ -50,7 +50,7 @@ atom: ID {
     printf("ID\n"); 
     ParseValue pv = {
       .idata = 0,
-      .cdata = "\0",
+      .cdata = "\0"
     };
     pv.cdata = strdup($1);
     stack_push(&parse_stack, &pv);
