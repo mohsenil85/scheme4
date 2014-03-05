@@ -1,5 +1,5 @@
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef EVAL_H
+#define EVAL_H
 
 #include "stack.h"
 //extern  Stack parse_stack;
@@ -7,7 +7,8 @@
 enum TypeValue {
   T_STRING,
   T_ID,
-  T_NUMBER
+  T_NUMBER,
+  T_FUN
 };
 
 typedef struct {
@@ -24,4 +25,4 @@ void parse_string(char * s);
 void parse_int(int i);
 void push_on_eval(Stack s);
 //void eval(Stack parse_stack);
-#endif /* COMMON_H */
+#endif /* EVAL_H */

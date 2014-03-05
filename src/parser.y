@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "stack.h"
-#include "common.h"
+#include "eval.h"
 #define _POSIX_C_SOURCE 1
 
 extern Stack parse_stack;
@@ -19,12 +19,14 @@ int yywrap() { return 1; }
   char* id;
   char* str;
   char* syn;
+  char* fun;
 }
 %token<num> NUMBER 
 %token<str> STR
 %token OPAREN CPAREN PLUS MULT NEWLINE ID EXIT 
 %type<id> ID atom 
-%type<syn> OPAREN CPAREN MULT PLUS
+%type<syn> OPAREN CPAREN
+%type<fun> MULT PLUS
 
 %start program
 %%
@@ -62,15 +64,14 @@ atom: ID {
     printf("STR\n");
     parse_string($1);
     }
-    | members {printf("members sub atom\n");}
     ;
 
 function: MULT  {
-        parse_string($1);
+        parse_syn($1);
         printf("mult\n");
         }
         | PLUS {
-        parse_string($1);
+        parse_syn($1);
         printf("plus\n");
         }
         ;

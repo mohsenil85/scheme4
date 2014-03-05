@@ -2,7 +2,7 @@
 
 #include "y.tab.h"
 #include "stack.h"
-#include "common.h"
+#include "eval.h"
 
 extern Stack parse_stack;
 extern Stack eval_stack;
