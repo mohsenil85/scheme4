@@ -5,7 +5,7 @@ mkdir -p bin;
 rm src/y.tab.*;
 rm src/lex.yy.c;
 cd src;
-yacc -d parser.y ;
+yacc -dv parser.y ;
 lex tokens.l;
 cd ..;
 make clean; make remove;  make;

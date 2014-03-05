@@ -5,3 +5,4 @@ src/y.tab.h
 bin/main
 *.o
 *.swp
+*.output
