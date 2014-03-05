@@ -83,7 +83,7 @@ open: OPAREN {
 
 close: CPAREN {
      printf("close paren\n");
-     push_on_eval(&parse_stack);
+     push_on_eval(parse_stack);
      }
      ;
 

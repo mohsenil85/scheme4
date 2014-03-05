@@ -21,5 +21,7 @@ typedef struct {
 void setup();
 void teardown();
 void parse_string(char * s);
-void eval(Stack parse_stack);
+void parse_int(int i);
+void push_on_eval(Stack s);
+//void eval(Stack parse_stack);
 #endif /* COMMON_H */
