@@ -23,6 +23,8 @@ void setup();
 void teardown();
 void parse_string(char * s);
 void parse_int(int i);
+void parse_syn(char * s);
 void push_on_eval(Stack s);
 //void eval(Stack parse_stack);
+ParseValue*  get_args(Stack s);
 #endif /* EVAL_H */
