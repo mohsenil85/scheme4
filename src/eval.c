@@ -102,7 +102,7 @@ ParseValue *get_args(Stack s){
   return arr;
 }
 void buildfun(ParseValue fun, ParseValue *arr){
-  func = fun.cdata;
+  //func = fun.cdata;
 
 }
 void push_on_eval(Stack s){
